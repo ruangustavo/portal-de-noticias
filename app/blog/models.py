@@ -30,3 +30,4 @@ class Postagem(models.Model):
 
     class Meta:
         ordering = ["-data_publicacao"]
+        verbose_name_plural = "Postagens"
