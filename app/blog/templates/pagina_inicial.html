@@ -6,7 +6,8 @@
             <h1 class="display-4 fst-italic">{{ principal_postagem_destacada.titulo }}</h1>
             <p class="lead my-3">{{ principal_postagem_destacada.conteudo | safe | linebreaksbr }}</p>
             <p class="lead mb-0">
-                <a href="#" class="text-body-emphasis fw-bold">Continuar leitura...</a>
+                <a href="{% url "detalhar_postagem" principal_postagem_destacada.pk %}"
+                   class="text-body-emphasis fw-bold">Continuar leitura...</a>
             </p>
         </div>
     </div>
@@ -19,7 +20,8 @@
                         <h3 class="mb-0">{{ postagem.titulo }}</h3>
                         <div class="mb-1 text-body-secondary">{{ postagem.data_publicacao | date:"d, M" }}</div>
                         <p class="card-text mb-auto">{{ postagem.conteudo | safe | linebreaksbr }}</p>
-                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                        <a href="{% url "detalhar_postagem" postagem.pk %}"
+                           class="icon-link gap-1 icon-link-hover stretched-link">
                             Continuar leitura
                             <svg class="bi">
                                 <use xlink:href="#chevron-right" />
@@ -64,39 +66,8 @@
                         Esse site foi feito por <a href="mailto:ruan.gustavo@escolar.ifrn.edu.br">Ruan Gustavo</a> e <a href="mailto:marcos.fabio@escolar.ifrn.edu.br">Marcos Fábio</a> para as disciplinas de Programação para Internet, Projeto e Desenvolvimento de Software e Fundamentos de Sistemas Operacionais e Sistemas Operacionais de Redes.
                     </p>
                 </div>
-                <div>
-                    <h4 class="fst-italic">Postagens recentes</h4>
-                    <ul class="list-unstyled">
-                        {% for postagem in postagens_recentes %}
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                   href="#">
-                                    {% if postagem.imagem.url %}
-                                        <img src="{{ postagem.imagem.url }}"
-                                             alt="{{ postagem.titulo }}"
-                                             class="bd-placeholder-img"
-                                             width="100"
-                                             height="100" />
-                                    {% endif %}
-                                    <div class="col-lg-8">
-                                        <h6 class="mb-0">{{ postagem.titulo }}</h6>
-                                        <small class="text-body-secondary">{{ postagem.data_publicacao | date:"F j, Y" }}</small>
-                                    </div>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="fst-italic">Arquivos</h4>
-                    <ol class="list-unstyled mb-0">
-                        {% for data in data_postagens_recentes %}
-                            <li>
-                                <a href="{% url "postagens_por_data" mes=data.month ano=data.year %}">{{ data|date:"F Y" }}</a>
-                            </li>
-                        {% endfor %}
-                    </ol>
-                </div>
+                {% include "partials/postagens_recentes.html" %}
+                {% include "partials/postagens_por_data.html" %}
             </div>
         </div>
     </div>

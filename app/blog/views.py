@@ -42,3 +42,9 @@ def pesquisar_postagens(request):
     )
     context = {"postagens": postagens}
     return render(request, "pesquisar_postagens.html", context)
+
+
+def detalhar_postagem(request, postagem_id):
+    postagem = get_object_or_404(Postagem, id=postagem_id)
+    context = {"postagem": postagem}
+    return render(request, "detalhar_postagem.html", context)

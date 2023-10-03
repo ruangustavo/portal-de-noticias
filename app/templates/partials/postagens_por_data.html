@@ -1,0 +1,10 @@
+<div>
+    <h4 class="fst-italic">Arquivos</h4>
+    <ol class="list-unstyled mb-0">
+        {% for data in data_postagens_recentes %}
+            <li>
+                <a href="{% url "postagens_por_data" mes=data.month ano=data.year %}">{{ data|date:"F Y" }}</a>
+            </li>
+        {% endfor %}
+    </ol>
+</div>
