@@ -1,26 +1,19 @@
 from django.shortcuts import render
 
-from .models import Categoria, Postagem
+from .models import Postagem
 
-MAX_POSTAGENS_DESTACADAS = 2
-MAX_POSTAGENS_RECENTES = 5
+MAX_POSTAGENS_DESTACADAS = 3
 
 
 def pagina_inicial(request):
-    categorias = Categoria.objects.all()
     postagens = Postagem.objects.all()
     principal_postagem_destacada = postagens.filter(destaque=True).first()
     postagens_destacadas = postagens.filter(destaque=True)[1:MAX_POSTAGENS_DESTACADAS]
-    postagens_recentes = postagens.order_by("-data_publicacao")[:MAX_POSTAGENS_RECENTES]
-    data_postagens_recentes = postagens.dates("data_publicacao", "month", order="DESC")
 
     context = {
-        "categorias": categorias,
         "postagens": postagens,
         "principal_postagem_destacada": principal_postagem_destacada,
         "postagens_destacadas": postagens_destacadas,
-        "postagens_recentes": postagens_recentes,
-        "data_postagens_recentes": data_postagens_recentes,
     }
     return render(request, "pagina_inicial.html", context)
 
