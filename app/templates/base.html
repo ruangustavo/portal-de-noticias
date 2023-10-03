@@ -23,13 +23,13 @@
               crossorigin="anonymous">
         <link href="{% static "css/styles.css" %}" rel="stylesheet" />
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         {% include "partials/color_mode_switcher.html" %}
         <div class="container">
             {% include "partials/header.html" %}
             {% include "partials/nav_bar.html" %}
         </div>
-        <main class="container">
+        <main class="container flex-grow-1">
             {% block content %}
             {% endblock content %}
         </main>
