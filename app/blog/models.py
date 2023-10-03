@@ -1,13 +1,5 @@
+from autor.models import Autor
 from django.db import models
-
-
-class Usuario(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField()
-    senha = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nome
 
 
 class Categoria(models.Model):
@@ -24,9 +16,15 @@ class Postagem(models.Model):
     titulo = models.CharField(max_length=100)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
+    destaque = models.BooleanField(default=False)
+    imagem = models.ImageField(upload_to="postagens", null=True, blank=True)
 
-    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     categoria = models.ManyToManyField(Categoria)
+
+    def __str__(self):
+        return self.titulo
 
     class Meta:
         ordering = ["-data_publicacao"]
+        verbose_name_plural = "Postagens"

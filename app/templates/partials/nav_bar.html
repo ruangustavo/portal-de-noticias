@@ -1,0 +1,8 @@
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline">
+        {% for categoria in categorias %}
+            <a class="nav-item nav-link link-body-emphasis" href="#">{{ categoria }}</a>
+            {% comment %} Adicione a classe 'active' se é a página atual {% endcomment %}
+        {% endfor %}
+    </nav>
+</div>
