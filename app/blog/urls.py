@@ -14,4 +14,5 @@ urlpatterns = [
         views.postagens_por_categoria,
         name="postagens_por_categoria",
     ),
+    path("pesquisar/", views.pesquisar_postagens, name="pesquisar_postagens"),
 ]

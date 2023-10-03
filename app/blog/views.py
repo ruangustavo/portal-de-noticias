@@ -31,3 +31,14 @@ def postagens_por_categoria(request, categoria_id):
     postagens = Postagem.objects.filter(categoria=categoria)
     context = {"postagens": postagens, "categoria_atual": categoria}
     return render(request, "postagens_por_categoria.html", context)
+
+
+def pesquisar_postagens(request):
+    termo_pesquisado = request.GET.get("q")
+    postagens = (
+        Postagem.objects.filter(titulo__icontains=termo_pesquisado)
+        if termo_pesquisado
+        else Postagem.objects.all()
+    )
+    context = {"postagens": postagens}
+    return render(request, "pesquisar_postagens.html", context)
