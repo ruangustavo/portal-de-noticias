@@ -118,3 +118,14 @@ h6 {
 .bd-mode-toggle .dropdown-menu .active .bi {
   display: block !important;
 }
+
+#search-input {
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+#search-input.active {
+  width: 200px;
+  opacity: 1;
+}
