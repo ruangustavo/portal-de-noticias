@@ -30,6 +30,10 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
 
 
 # Application definition
+THIRD_PARTY_APPS = [
+    "ckeditor",
+    "ckeditor_uploader",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -40,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blog",
     "autor",
-]
+] + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -134,3 +138,37 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CK Editor
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Custom",
+        "toolbar_Custom": [
+            [
+                "Bold",
+                "Italic",
+                "Underline",
+            ],
+            [
+                "NumberedList",
+                "BulletedList",
+                "-",
+                "Outdent",
+                "Indent",
+                "-",
+                "JustifyLeft",
+                "JustifyCenter",
+                "JustifyRight",
+                "JustifyBlock",
+            ],
+            [
+                "Link",
+                "Unlink",
+            ],
+            [
+                "Image",
+            ],
+        ],
+    }
+}

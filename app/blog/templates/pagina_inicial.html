@@ -49,7 +49,7 @@
                     <p class="blog-post-meta">
                         {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="#">{{ postagem.autor.usuario.username }}</a>
                     </p>
-                    <p>{{ postagem.conteudo | safe | linebreaks }}</p>
+                    <p>{{ postagem.conteudo | safe }}</p>
                 </article>
             {% endfor %}
             <nav class="blog-pagination" aria-label="Pagination">
