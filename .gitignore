@@ -157,3 +157,6 @@ cython_debug/
 
 # Ruff linter
 .ruff_cache
+
+# Media files 
+**/mediafiles/*
