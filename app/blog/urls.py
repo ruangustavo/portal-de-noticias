@@ -9,4 +9,9 @@ urlpatterns = [
         views.postagens_por_data,
         name="postagens_por_data",
     ),
+    path(
+        "categorias/<int:categoria_id>/",
+        views.postagens_por_categoria,
+        name="postagens_por_categoria",
+    ),
 ]

@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-from .models import Postagem
+from .models import Categoria, Postagem
 
 MAX_POSTAGENS_DESTACADAS = 3
 
@@ -24,3 +24,10 @@ def postagens_por_data(request, mes, ano):
     )
     context = {"postagens": postagens}
     return render(request, "postagens_por_data.html", context)
+
+
+def postagens_por_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, id=categoria_id)
+    postagens = Postagem.objects.filter(categoria=categoria)
+    context = {"postagens": postagens, "categoria_atual": categoria}
+    return render(request, "postagens_por_categoria.html", context)
