@@ -16,6 +16,8 @@ class Postagem(models.Model):
     titulo = models.CharField(max_length=100)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
+    destaque = models.BooleanField(default=False)
+    imagem = models.ImageField(upload_to="postagens", null=True, blank=True)
 
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     categoria = models.ManyToManyField(Categoria)
