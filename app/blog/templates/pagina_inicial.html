@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-        <div class="col-lg-6 px-0">
-            <h1 class="display-4 fst-italic">{{ principal_postagem_destacada.titulo }}</h1>
-            <p class="lead my-3">{{ principal_postagem_destacada.conteudo|truncatechars:200 | safe }}</p>
-            <p class="lead mb-0">
-                <a href="{% url "detalhar_postagem" principal_postagem_destacada.pk %}"
-                   class="text-body-emphasis fw-bold">Continuar leitura...</a>
-            </p>
+    {% if principal_postagem_destacada %}
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+            <div class="col-lg-6 px-0">
+                <h1 class="display-4 fst-italic">{{ principal_postagem_destacada.titulo }}</h1>
+                <p class="lead my-3">{{ principal_postagem_destacada.conteudo|truncatechars:200 | safe }}</p>
+                <p class="lead mb-0">
+                    <a href="{% url "detalhar_postagem" principal_postagem_destacada.pk %}"
+                       class="text-body-emphasis fw-bold">Continuar leitura...</a>
+                </p>
+            </div>
         </div>
-    </div>
+    {% endif %}
     <div class="row mb-2">
         {% for postagem in postagens_destacadas %}
             <div class="{% if postagens_destacadas|length > 1 %}col-md-6{% else %}col-md-12{% endif %}">
