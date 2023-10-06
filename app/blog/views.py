@@ -1,3 +1,4 @@
+from autor.models import Autor
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -60,7 +61,10 @@ def criar_postagem(request):
 
         if postagem_form.is_valid() and categoria_form.is_valid():
             postagem = postagem_form.save(commit=False)
-            postagem.autor = request.user
+
+            autor = Autor.objects.get(usuario=request.user)
+            postagem.autor = autor
+
             postagem.save()
 
             categoria_selecionada = categoria_form.cleaned_data.get(

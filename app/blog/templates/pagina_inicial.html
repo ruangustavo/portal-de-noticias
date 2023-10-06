@@ -23,7 +23,7 @@
                         <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
-                        {% if postagem.imagem.url %}
+                        {% if postagem.imagem %}
                             <img src="{{ postagem.imagem.url }}"
                                  alt="{{ postagem.titulo }}"
                                  class="bd-placeholder-img"
