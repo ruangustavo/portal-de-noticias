@@ -5,6 +5,8 @@
             <li>
                 <a href="{% url "postagens_por_data" mes=data.month ano=data.year %}">{{ data|date:"F Y" }}</a>
             </li>
+        {% empty %}
+            <p>Nenhuma postagem encontrada nos arquivos.</p>
         {% endfor %}
     </ol>
 </div>
