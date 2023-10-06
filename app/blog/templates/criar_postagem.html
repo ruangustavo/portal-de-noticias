@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="titulo" class="form-label">Titulo</label>
+            {{ postagem_form.titulo }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="conteudo" class="form-label">Conteúdo</label>
+            {{ postagem_form.media }}
+            <div class="d-block">{{ postagem_form.conteudo }}</div>
+        </div>
+        <div class="form-check">
+            <label for="destaque" class="form-check-label">Destaque</label>
+            {{ postagem_form.destaque }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="imagem" class="form-label">Imagem</label>
+            {{ postagem_form.imagem }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="categoria" class="form-label">Escolha uma categoria existente</label>
+            {{ categoria_form.categorias_existentes }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="categoria" class="form-label">Ou crie uma nova categoria</label>
+            {{ categoria_form.categoria }}
+        </div>
+        <button type="submit" class="btn btn-primary">Criar postagem</button>
+    </form>
+{% endblock content %}

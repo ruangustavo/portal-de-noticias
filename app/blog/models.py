@@ -1,4 +1,5 @@
 from autor.models import Autor
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 
@@ -14,7 +15,7 @@ class Categoria(models.Model):
 
 class Postagem(models.Model):
     titulo = models.CharField(max_length=100)
-    conteudo = models.TextField()
+    conteudo = RichTextUploadingField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
     destaque = models.BooleanField(default=False)
     imagem = models.ImageField(upload_to="postagens", null=True, blank=True)
