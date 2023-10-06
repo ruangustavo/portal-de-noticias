@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CategoriaForm, PostagemForm
@@ -51,6 +52,7 @@ def detalhar_postagem(request, postagem_id):
     return render(request, "detalhar_postagem.html", context)
 
 
+@login_required(login_url="/login/")
 def criar_postagem(request):
     if request.method == "POST":
         postagem_form = PostagemForm(request.POST, request.FILES)
