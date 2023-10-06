@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm
@@ -15,3 +15,8 @@ def pagina_login(request):
         form = LoginForm()
 
     return render(request, "login.html", {"form": form})
+
+
+def pagina_logout(request):
+    logout(request)
+    return redirect("pagina_inicial")
