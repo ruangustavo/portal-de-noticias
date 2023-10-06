@@ -20,4 +20,5 @@ urlpatterns = [
         name="postagens_por_categoria",
     ),
     path("pesquisar/", views.pesquisar_postagens, name="pesquisar_postagens"),
+    path("postagens/criar/", views.criar_postagem, name="criar_postagem"),
 ]

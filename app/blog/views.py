@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import CategoriaForm, PostagemForm
 from .models import Categoria, Postagem
 
 MAX_POSTAGENS_DESTACADAS = 3
@@ -48,3 +49,34 @@ def detalhar_postagem(request, postagem_id):
     postagem = get_object_or_404(Postagem, id=postagem_id)
     context = {"postagem": postagem}
     return render(request, "detalhar_postagem.html", context)
+
+
+def criar_postagem(request):
+    if request.method == "POST":
+        postagem_form = PostagemForm(request.POST, request.FILES)
+        categoria_form = CategoriaForm(request.POST)
+
+        if postagem_form.is_valid() and categoria_form.is_valid():
+            postagem = postagem_form.save(commit=False)
+            postagem.autor = request.user
+            postagem.save()
+
+            categoria_selecionada = categoria_form.cleamed_data.get(
+                "categorias_existentes"
+            )
+            nova_categoria = categoria_form.cleamed_data.get("categoria")
+
+            if categoria_selecionada:
+                postagem.categoria.set(categoria_selecionada)
+
+            if nova_categoria:
+                categoria = Categoria.objects.create(nome=nova_categoria)
+                postagem.categoria.add(categoria)
+
+            return redirect("pagina_inicial")
+    else:
+        postagem_form = PostagemForm()
+        categoria_form = CategoriaForm()
+
+    context = {"postagem_form": postagem_form, "categoria_form": categoria_form}
+    return render(request, "criar_postagem.html", context)
