@@ -1,20 +1,27 @@
 from autor.models import Autor
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CategoriaForm, PostagemForm
 from .models import Categoria, Postagem
 
 MAX_POSTAGENS_DESTACADAS = 3
+MAX_POSTAGENS_POR_PAGINA = 1
 
 
 def pagina_inicial(request):
     postagens = Postagem.objects.all()
+
+    paginator = Paginator(postagens, MAX_POSTAGENS_POR_PAGINA)
+    pagina = request.GET.get("page")
+    postagens_paginadas = paginator.get_page(pagina)
+
     principal_postagem_destacada = postagens.filter(destaque=True).first()
     postagens_destacadas = postagens.filter(destaque=True)[1:MAX_POSTAGENS_DESTACADAS]
 
     context = {
-        "postagens": postagens,
+        "postagens_paginadas": postagens_paginadas,
         "principal_postagem_destacada": principal_postagem_destacada,
         "postagens_destacadas": postagens_destacadas,
     }

@@ -39,7 +39,7 @@
     </div>
     <div class="row g-5">
         <div class="col-md-8">
-            {% for postagem in postagens %}
+            {% for postagem in postagens_paginadas %}
                 <article class="blog-post">
                     <h2 class="display-5 link-body-emphasis mb-1">{{ postagem.titulo }}</h2>
                     <p class="blog-post-meta">
@@ -50,9 +50,22 @@
                 </article>
             {% endfor %}
             <nav class="blog-pagination" aria-label="Pagination">
-                <a class="btn btn-outline-primary rounded-pill" href="#">Anteriores</a>
-                <a class="btn btn-outline-secondary rounded-pill disabled"
-                   aria-disabled="true">Atualizados</a>
+                {% if postagens_paginadas.has_previous %}
+                    <a class="btn btn-outline-secondary rounded-pill"
+                       href="?page={{ postagens_paginadas.previous_page_number }}">Anterior</a>
+                {% endif %}
+                {% for num in postagens_paginadas.paginator.page_range %}
+                    {% if postagens_paginadas.number == num %}
+                        <a class="btn btn-outline-primary rounded-pill active"
+                           href="?page={{ num }}">{{ num }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary rounded-pill" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if postagens_paginadas.has_next %}
+                    <a class="btn btn-outline-primary rounded-pill"
+                       href="?page={{ postagens_paginadas.next_page_number }}">Próximo</a>
+                {% endif %}
             </nav>
         </div>
         <div class="col-md-4">
