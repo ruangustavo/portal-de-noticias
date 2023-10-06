@@ -1,3 +1,5 @@
+from autor.models import Autor
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CategoriaForm, PostagemForm
@@ -51,6 +53,7 @@ def detalhar_postagem(request, postagem_id):
     return render(request, "detalhar_postagem.html", context)
 
 
+@login_required(login_url="/login/")
 def criar_postagem(request):
     if request.method == "POST":
         postagem_form = PostagemForm(request.POST, request.FILES)
@@ -58,13 +61,16 @@ def criar_postagem(request):
 
         if postagem_form.is_valid() and categoria_form.is_valid():
             postagem = postagem_form.save(commit=False)
-            postagem.autor = request.user
+
+            autor = Autor.objects.get(usuario=request.user)
+            postagem.autor = autor
+
             postagem.save()
 
-            categoria_selecionada = categoria_form.cleamed_data.get(
+            categoria_selecionada = categoria_form.cleaned_data.get(
                 "categorias_existentes"
             )
-            nova_categoria = categoria_form.cleamed_data.get("categoria")
+            nova_categoria = categoria_form.cleaned_data.get("categoria")
 
             if categoria_selecionada:
                 postagem.categoria.set(categoria_selecionada)
