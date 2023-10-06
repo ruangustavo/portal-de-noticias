@@ -2,6 +2,7 @@ from django.contrib.auth import login, logout
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm, RegistrationForm
+from .models import Autor
 
 
 def pagina_login(request):
@@ -9,7 +10,8 @@ def pagina_login(request):
         form = LoginForm(request, data=request.POST)
 
         if form.is_valid():
-            login(request, form.get_user())
+            usuario = form.get_user()
+            login(request, usuario)
             return redirect("pagina_inicial")
     else:
         form = LoginForm()
@@ -26,8 +28,9 @@ def pagina_registrar(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            usuario = form.save()
+            Autor.objects.create(usuario=usuario)
+            login(request, usuario)
             return redirect("pagina_inicial")
     else:
         form = RegistrationForm()
