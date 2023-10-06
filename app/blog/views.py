@@ -61,10 +61,10 @@ def criar_postagem(request):
             postagem.autor = request.user
             postagem.save()
 
-            categoria_selecionada = categoria_form.cleamed_data.get(
+            categoria_selecionada = categoria_form.cleaned_data.get(
                 "categorias_existentes"
             )
-            nova_categoria = categoria_form.cleamed_data.get("categoria")
+            nova_categoria = categoria_form.cleaned_data.get("categoria")
 
             if categoria_selecionada:
                 postagem.categoria.set(categoria_selecionada)
