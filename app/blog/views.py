@@ -7,7 +7,7 @@ from .forms import CategoriaForm, PostagemForm
 from .models import Categoria, Postagem
 
 MAX_POSTAGENS_DESTACADAS = 3
-MAX_POSTAGENS_POR_PAGINA = 1
+MAX_POSTAGENS_POR_PAGINA = 3
 
 
 def pagina_inicial(request):
@@ -32,14 +32,24 @@ def postagens_por_data(request, mes, ano):
     postagens = Postagem.objects.filter(
         data_publicacao__month=mes, data_publicacao__year=ano
     )
-    context = {"postagens": postagens}
+
+    paginator = Paginator(postagens, MAX_POSTAGENS_POR_PAGINA)
+    pagina = request.GET.get("page")
+    postagens_paginadas = paginator.get_page(pagina)
+
+    context = {"postagens_paginadas": postagens_paginadas}
     return render(request, "postagens_por_data.html", context)
 
 
 def postagens_por_categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, id=categoria_id)
     postagens = Postagem.objects.filter(categoria=categoria)
-    context = {"postagens": postagens, "categoria_atual": categoria}
+
+    paginator = Paginator(postagens, MAX_POSTAGENS_POR_PAGINA)
+    pagina = request.GET.get("page")
+    postagens_paginadas = paginator.get_page(pagina)
+
+    context = {"postagens_paginadas": postagens_paginadas, "categoria_atual": categoria}
     return render(request, "postagens_por_categoria.html", context)
 
 

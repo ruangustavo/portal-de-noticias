@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row g-5">
         <div class="col-md-8">
-            {% for postagem in postagens %}
+            {% for postagem in postagens_paginadas %}
                 <article class="blog-post">
                     <h2 class="display-5 link-body-emphasis mb-1">{{ postagem.titulo }}</h2>
                     <p class="blog-post-meta">
@@ -17,11 +17,7 @@
                     Nenhuma postagem encontrada. Clique <a href="{% url "pagina_inicial" %}">aqui</a> para voltar para a página inicial.
                 </p>
             {% endfor %}
-            <nav class="blog-pagination" aria-label="Pagination">
-                <a class="btn btn-outline-primary rounded-pill" href="#">Anteriores</a>
-                <a class="btn btn-outline-secondary rounded-pill disabled"
-                   aria-disabled="true">Atualizados</a>
-            </nav>
+            {% include "partials/paginacao.html" %}
         </div>
         <div class="col-md-4">
             <div class="position-sticky">

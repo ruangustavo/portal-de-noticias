@@ -16,11 +16,7 @@
                     Nenhuma postagem encontrada. Clique <a href="{% url "pagina_inicial" %}">aqui</a> para voltar para a página inicial.
                 </p>
             {% endfor %}
-            <nav class="blog-pagination" aria-label="Pagination">
-                <a class="btn btn-outline-primary rounded-pill" href="#">Anteriores</a>
-                <a class="btn btn-outline-secondary rounded-pill disabled"
-                   aria-disabled="true">Atualizados</a>
-            </nav>
+            {% include "partials/paginacao.html" %}
         </div>
         <div class="col-md-4">
             <div class="position-sticky">
