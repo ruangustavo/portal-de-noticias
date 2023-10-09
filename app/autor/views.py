@@ -1,9 +1,12 @@
 from blog.models import Postagem
 from django.contrib.auth import login, logout
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LoginForm, RegistrationForm
 from .models import Autor
+
+MAX_POSTAGENS_POR_PAGINA = 3
 
 
 def pagina_login(request):
@@ -41,5 +44,12 @@ def pagina_registrar(request):
 def detalhar_autor(request, autor_id):
     autor = get_object_or_404(Autor, id=autor_id)
     postagens = Postagem.objects.filter(autor__id=autor_id)
-    context = {"autor": autor, "postagens": postagens}
+    paginator = Paginator(postagens, MAX_POSTAGENS_POR_PAGINA)
+    pagina = request.GET.get("page")
+    postagens_paginadas = paginator.get_page(pagina)
+    context = {
+        "autor": autor,
+        "postagens": postagens,
+        "postagens_paginadas": postagens_paginadas,
+    }
     return render(request, "detalhar_autor.html", context)
