@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div>
+    <div class="container">
+        <h1>Detalhes do autor</h1>
         <p class="mb-0">
             O usuário <strong>{{ autor.usuario.username }}</strong> tem <strong>{{ postagens|length }}</strong> postagem{{ postagens|pluralize:"ns" }}
         </p>
     </div>
     <div class="container">
+        <h1>Postagens do Autor</h1>
         {% for postagem in postagens %}
             <article class="blog-post">
                 <h2 class="display-5 link-body-emphasis mb-1">{{ postagem }}</h2>
