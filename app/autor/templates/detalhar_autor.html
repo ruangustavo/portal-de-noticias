@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div>
+        <p class="mb-0">
+            O usuário <strong>{{ autor.usuario.username }}</strong> tem <strong>{{ postagens|length }}</strong> postagem{{ postagens|pluralize:"ns" }}
+        </p>
+    </div>
+{% endblock content %}

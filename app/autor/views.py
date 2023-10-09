@@ -1,5 +1,6 @@
+from blog.models import Postagem
 from django.contrib.auth import login, logout
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LoginForm, RegistrationForm
 from .models import Autor
@@ -35,3 +36,10 @@ def pagina_registrar(request):
     else:
         form = RegistrationForm()
     return render(request, "registrar.html", {"form": form})
+
+
+def detalhar_autor(request, autor_id):
+    autor = get_object_or_404(Autor, id=autor_id)
+    postagens = Postagem.objects.filter(autor__id=autor_id)
+    context = {"autor": autor, "postagens": postagens}
+    return render(request, "detalhar_autor.html", context)
