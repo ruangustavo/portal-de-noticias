@@ -43,7 +43,7 @@
                 <article class="blog-post">
                     <h2 class="display-5 link-body-emphasis mb-1">{{ postagem.titulo }}</h2>
                     <p class="blog-post-meta">
-                        {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="#">{{ postagem.autor.usuario.username }}</a>
+                        {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
                     </p>
                     <p>{{ postagem.conteudo|truncatechars:600 | safe }}</p>
                     <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
