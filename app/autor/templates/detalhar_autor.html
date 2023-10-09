@@ -15,6 +15,13 @@
                 <p class="blog-post-meta">
                     {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
                 </p>
+                {% if postagem.imagem %}
+                    <img src="{{ postagem.imagem.url }}"
+                         class="img-fluid"
+                         width="600"
+                         height="400"
+                         alt="Imagem da notícia {{ postagem.titulo }}">
+                {% endif %}
                 <p>{{ postagem.conteudo|truncatechars:600 | safe }}</p>
                 <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
             </article>
