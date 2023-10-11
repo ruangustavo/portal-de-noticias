@@ -2,7 +2,7 @@
     <nav class="nav nav-underline">
         {% for categoria in categorias %}
             <a class="nav-item nav-link link-body-emphasis {% if categoria_atual.nome == categoria.nome %}active{% endif %}"
-               href="{% url "postagens_por_categoria" categoria.pk %}">{{ categoria }}</a>
+               href="{% url "postagens_por_categoria" categoria.slug %}">{{ categoria }}</a>
         {% endfor %}
     </nav>
 </div>
