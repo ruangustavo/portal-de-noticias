@@ -40,8 +40,19 @@
                 </div>
             </form>
             {% if user.is_authenticated %}
-                <a class="btn btn-sm btn-outline-secondary"
-                   href="{% url "pagina_logout" %}">Logout</a>
+                <div class="dropdown">
+                    <button class="btn link-secondary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown">Minha conta</button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a href="{% url "pagina_logout" %}" class="dropdown-item text-danger">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             {% else %}
                 <a class="btn btn-sm btn-outline-secondary"
                    href="{% url "pagina_login" %}">Login</a>
