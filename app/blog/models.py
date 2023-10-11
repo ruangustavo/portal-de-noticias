@@ -13,7 +13,7 @@ class Categoria(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.titulo)
+            self.slug = slugify(self.nome)
         super().save(*args, **kwargs)
 
     class Meta:

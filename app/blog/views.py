@@ -41,8 +41,8 @@ def postagens_por_data(request, mes, ano):
     return render(request, "postagens_por_data.html", context)
 
 
-def postagens_por_categoria(request, categoria_id):
-    categoria = get_object_or_404(Categoria, id=categoria_id)
+def postagens_por_categoria(request, slug):
+    categoria = get_object_or_404(Categoria, slug=slug)
     postagens = Postagem.objects.filter(categoria=categoria)
 
     paginator = Paginator(postagens, MAX_POSTAGENS_POR_PAGINA)
@@ -64,8 +64,8 @@ def pesquisar_postagens(request):
     return render(request, "pesquisar_postagens.html", context)
 
 
-def detalhar_postagem(request, postagem_id):
-    postagem = get_object_or_404(Postagem, id=postagem_id)
+def detalhar_postagem(request, slug):
+    postagem = get_object_or_404(Postagem, slug=slug)
     context = {"postagem": postagem}
     return render(request, "detalhar_postagem.html", context)
 

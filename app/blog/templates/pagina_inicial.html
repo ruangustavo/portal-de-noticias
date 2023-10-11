@@ -22,7 +22,7 @@
                         <h3 class="mb-0">{{ postagem.titulo }}</h3>
                         <div class="mb-1 text-body-secondary">{{ postagem.data_publicacao | date:"d, M" }}</div>
                         <p class="card-text mb-auto">{{ postagem.conteudo | safe | linebreaksbr }}</p>
-                        <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
+                        <a href="{% url "detalhar_postagem" postagem.slug %}" class="icon-link">Continuar leitura</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         {% if postagem.imagem %}
@@ -46,7 +46,7 @@
                         {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
                     </p>
                     <p>{{ postagem.conteudo|truncatechars:600 | safe }}</p>
-                    <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
+                    <a href="{% url "detalhar_postagem" postagem.slug %}" class="icon-link">Continuar leitura</a>
                 </article>
             {% endfor %}
             {% include "partials/paginacao.html" %}
