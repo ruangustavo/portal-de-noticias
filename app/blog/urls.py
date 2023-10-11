@@ -4,8 +4,9 @@ from . import views
 
 urlpatterns = [
     path("", views.pagina_inicial, name="pagina_inicial"),
+    path("postagens/criar/", views.criar_postagem, name="criar_postagem"),
     path(
-        "postagens/<int:postagem_id>/",
+        "postagens/<slug:slug>/",
         views.detalhar_postagem,
         name="detalhar_postagem",
     ),
@@ -15,10 +16,9 @@ urlpatterns = [
         name="postagens_por_data",
     ),
     path(
-        "categorias/<int:categoria_id>/",
+        "categorias/<slug:slug>/",
         views.postagens_por_categoria,
         name="postagens_por_categoria",
     ),
     path("pesquisar/", views.pesquisar_postagens, name="pesquisar_postagens"),
-    path("postagens/criar/", views.criar_postagem, name="criar_postagem"),
 ]

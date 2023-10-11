@@ -10,7 +10,7 @@
                         {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
                     </p>
                     <p>{{ postagem.conteudo|truncatechars:200 | safe }}</p>
-                    <a href="{% url "detalhar_postagem" postagem.pk %}" class="icon-link">Continuar leitura</a>
+                    <a href="{% url "detalhar_postagem" postagem.slug %}" class="icon-link">Continuar leitura</a>
                 </article>
             {% empty %}
                 <p>
