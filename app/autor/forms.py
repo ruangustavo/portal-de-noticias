@@ -10,6 +10,8 @@ class LoginForm(AuthenticationForm):
 
 
 class RegistrationForm(UserCreationForm):
+    nome = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    sobrenome = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
     password1 = forms.CharField(

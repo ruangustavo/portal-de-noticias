@@ -4,6 +4,16 @@
     <form method="post">
         {% csrf_token %}
         <div class="form-group mb-3">
+            <label for="{{ form.nome.id_for_label }}">Nome:</label>
+            {{ form.nome }}
+            {{ form.nome.errors }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="{{ form.sobrenome.id_for_label }}">Sobrenome:</label>
+            {{ form.sobrenome }}
+            {{ form.sobrenome.errors }}
+        </div>
+        <div class="form-group mb-3">
             <label for="{{ form.username.id_for_label }}">Usuário:</label>
             {{ form.username }}
             {{ form.username.errors }}
