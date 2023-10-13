@@ -3,6 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>Detalhes do autor</h1>
+        <p class="mb-0">{{ autor.usuario.nome }} {{ autor.usuario.sobrenome }}</p>
         <p class="mb-0">
             O usuário <strong>{{ autor.usuario.username }}</strong> tem <strong>{{ postagens|length }}</strong> postagem{{ postagens|pluralize:"ns" }}
         </p>
