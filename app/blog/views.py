@@ -102,4 +102,48 @@ def criar_postagem(request):
         categoria_form = CategoriaForm()
 
     context = {"postagem_form": postagem_form, "categoria_form": categoria_form}
-    return render(request, "criar_postagem.html", context)
+    return render(request, "criar_ou_editar_postagem.html", context)
+
+
+@login_required(login_url="/login/")
+def editar_postagem(request, slug):
+    postagem = get_object_or_404(Postagem, slug=slug)
+
+    if request.method == "POST":
+        postagem_form = PostagemForm(request.POST, request.FILES, instance=postagem)
+        categoria_form = CategoriaForm(request.POST)
+
+        if postagem_form.is_valid() and categoria_form.is_valid():
+            postagem = postagem_form.save(commit=False)
+
+            autor = Autor.objects.get(usuario=request.user)
+            postagem.autor = autor
+
+            postagem.save()
+
+            categoria_selecionada = categoria_form.cleaned_data.get(
+                "categorias_existentes"
+            )
+            nova_categoria = categoria_form.cleaned_data.get("categoria")
+
+            if categoria_selecionada:
+                postagem.categoria.set(categoria_selecionada)
+
+            if nova_categoria:
+                categoria = Categoria.objects.create(nome=nova_categoria)
+                postagem.categoria.add(categoria)
+
+            return redirect("pagina_inicial")
+    else:
+        postagem_form = PostagemForm(instance=postagem)
+        categoria_form = CategoriaForm()
+
+    context = {"postagem_form": postagem_form, "categoria_form": categoria_form}
+    return render(request, "criar_ou_editar_postagem.html", context)
+
+
+@login_required(login_url="/login/")
+def excluir_postagem(request, slug):
+    postagem = get_object_or_404(Postagem, slug=slug)
+    postagem.delete()
+    return redirect("pagina_inicial")
