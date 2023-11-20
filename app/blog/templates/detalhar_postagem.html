@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <article class="blog-post">
+    <article class="blog-post text-center">
         <h2 class="display-5 link-body-emphasis mb-1">{{ postagem.titulo }}</h2>
         <p class="blog-post-meta">
             {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
@@ -9,8 +9,8 @@
         {% if postagem.imagem %}
             <img src="{{ postagem.imagem.url }}"
                  class="img-fluid"
-                 width="600"
-                 height="400"
+                 width="400"
+                 height="200"
                  alt="Imagem da notícia {{ postagem.titulo }}">
         {% endif %}
         <p>{{ postagem.conteudo | safe }}</p>
