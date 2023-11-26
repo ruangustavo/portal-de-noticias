@@ -7,7 +7,7 @@ urlpatterns = [
     path(
         "postagens/criar/",
         views.criar_postagem,
-        name="criar_ou_editar_postagem.html",
+        name="criar_ou_editar_postagem",
     ),
     path(
         "postagens/<slug:slug>/",

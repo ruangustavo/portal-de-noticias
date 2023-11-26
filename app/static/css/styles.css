@@ -128,8 +128,9 @@ h6 {
 
 #search-input.active {
   display: block;
-  width: 100%;
+  width: 150px;
   opacity: 1;
+  margin-right: 8px;
 }
 
 .icon-size {

@@ -16,6 +16,10 @@
                href="{% url "pagina_inicial" %}">Portal de Notícias</a>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center gap-3">
+            <a href="{% url 'criar_ou_editar_postagem' %}"
+               class="text-reset text-decoration-none">
+                <i class="ph ph-file-text icon-size"></i>
+            </a>
             {% include "partials/theme_selector.html" %}
             <form action="{% url "pesquisar_postagens" %}">
                 <div class="d-flex align-items-center">
