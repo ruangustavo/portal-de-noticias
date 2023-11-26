@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="auto">
     <head>
-        <script src="{% static "js/color-modes.js" %}" defer></script>
+        <script src="{% static "js/theme-selector.js" %}" defer></script>
         <script src="{% static "js/barra-de-pesquisa.js" %}" defer></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,7 +25,6 @@
         <link href="{% static "css/styles.css" %}" rel="stylesheet" />
     </head>
     <body class="d-flex flex-column min-vh-100">
-        {% include "partials/color_mode_switcher.html" %}
         <div class="container">
             {% include "partials/header.html" %}
             {% include "partials/nav_bar.html" %}

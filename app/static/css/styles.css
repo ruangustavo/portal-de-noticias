@@ -120,12 +120,20 @@ h6 {
 }
 
 #search-input {
+  display: none;
   width: 0;
   opacity: 0;
-  transition: width 0.3s ease, opacity 0.3s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 #search-input.active {
-  width: 200px;
+  display: block;
+  width: 100%;
   opacity: 1;
 }
+
+.icon-size {
+  font-size: 1.5rem;
+}
+
+
