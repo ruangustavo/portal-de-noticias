@@ -27,6 +27,8 @@ class Postagem(models.Model):
     destaque = models.BooleanField(default=False)
     imagem = models.ImageField(upload_to="postagens", null=True, blank=True)
     slug = models.SlugField(unique=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
 
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     categoria = models.ManyToManyField(Categoria)

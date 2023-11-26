@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <article class="blog-post text-center">
+    <article class="blog-post">
         <h2 class="display-5 link-body-emphasis mb-1">{{ postagem.titulo }}</h2>
         <p class="blog-post-meta">
-            {{ postagem.data_publicacao | date:"D, d M Y" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a>
-            <div class="d-flex align-items-center justify-content-center gap-4">
+            {% if postagem.atualizado_em.hour != postagem.criado_em.hour or postagem.atualizado_em.minute != postagem.criado_em.minute %}
+                <small>Atualizado em {{ postagem.atualizado_em | date:"D, d M Y" }} às {{ postagem.atualizado_em | date:"H:i" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a></small>
+            {% else %}
+                <small>Postado em {{ postagem.criado_em | date:"D, d M Y" }} às {{ postagem.criado_em | date:"H:i" }} por <a href="{% url 'detalhar_autor' postagem.autor.id %}">{{ postagem.autor.usuario.username }}</a></small>
+            {% endif %}
+            <div class="d-flex gap-4">
                 {% if postagem.autor.usuario == user %}
                     <a href="{% url 'editar_postagem' postagem.slug %}">
                         <i class="ph ph-arrows-clockwise"></i>
