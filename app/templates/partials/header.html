@@ -17,7 +17,9 @@
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center gap-3">
             <a href="{% url 'criar_ou_editar_postagem' %}"
-               class="text-reset text-decoration-none">
+               class="text-reset text-decoration-none"
+               data-bs-toggle="tooltip"
+               data-bs-title="Criar postagem">
                 <i class="ph ph-file-text icon-size"></i>
             </a>
             {% include "partials/theme_selector.html" %}
@@ -30,7 +32,9 @@
                            name="q">
                     <a id="search-icon"
                        class="text-reset text-decoration-none"
-                       aria-label="Search">
+                       aria-label="Search"
+                       data-bs-toggle="tooltip"
+                       data-bs-title="Pesquisar">
                         <i class="ph ph-magnifying-glass icon-size"></i>
                     </a>
                 </div>
